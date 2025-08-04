@@ -1,16 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { CircularText } from "./Icons";
-import Link from "next/link";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { CircularText } from './Icons';
+import Link from 'next/link';
 
 function HireMe(props) {
   return (
-    <div className="fixed left-4 bottom-4 flex item-center justify-center overflow-hidden
-    md:right-8 md:top-0 md:left-auto md:bottom-auto md:absolute sm:right-0">
-      <div className="w-48 h-auto flex items-center justify-center relative
-      md:w-24">
+    <div
+      className="fixed left-4 bottom-4 flex item-center justify-center overflow-hidden
+    md:right-8 md:top-0 md:left-auto md:bottom-auto md:absolute sm:right-0"
+    >
+      <div
+        className="w-48 h-auto flex items-center justify-center relative
+      md:w-24"
+      >
         <CircularText
-          className={"fill-dark animate-spin-slow dark:fill-light"}
+          className={'fill-dark animate-spin-slow dark:fill-light'}
         />
         <Link
           href="mailto:tt2861997@gmail.com"
