@@ -9,6 +9,7 @@ import { LinkArrow } from '@/components/Icons';
 import HireMe from '@/components/HireMe';
 import TransitionEffect from '@/components/TransitionEffect';
 import { calculateYearsFromDate } from '../../helpers/helper';
+import BlurText from '@/components/BlurText';
 
 export default function Home() {
   const expirentYears = calculateYearsFromDate('01/09/2018');
@@ -32,11 +33,20 @@ export default function Home() {
               />
             </div>
             <div className="w-1/2 flex flex-col items-center self-center lg:w-full lg:text-center">
-              <AnimatedText
+              {/* <AnimatedText
                 text="Transforming Vision into Stunning Interfaces with Code and Design."
                 className="!text-6xl !text-left
                 xl:!text-5xl lg:!text-center lg:!text-6xl md:!text-5xl sm:!text-3xl"
+              /> */}
+              <BlurText
+                text="Transforming Vision into Stunning Interfaces with Code and Design."
+                delay={150}
+                animateBy="words"
+                direction="top"
+                className="!text-6xl !text-left
+                xl:!text-5xl lg:!text-center lg:!text-6xl md:!text-5xl sm:!text-3xl"
               />
+
               <p className="my-4 text-base font-medium md:text-sm sm:text-xs">
                 I am a passionate Front-End Engineer, weaving stunning,
                 responsive interfaces with Next.js, Tailwind CSS, and a flair
