@@ -1,0 +1,14 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="200" height="200" fill="#FFFFFF" />
+
+    <g id="CodeTagLogo">
+        <path d="M155 70 L140 85 L155 100" fill="none" stroke="#3498DB" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        
+        <text x="200" y="98" font-family="Arial, sans-serif" font-weight="bold" font-size="60" fill="#2ECC71" text-anchor="middle" dominant-baseline="middle">T</text>
+        
+        <path d="M255 70 L270 85 L255 100" fill="none" stroke="#3498DB" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        
+        <line x2="258" y1="70" x1="268" y2="100" stroke="#3498DB" stroke-width="8" stroke-linecap="round"/> 
+    </g>
+
+</svg>
