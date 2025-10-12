@@ -1,17 +1,8 @@
-import React, {useState} from "react"
-import PropTypes from "prop-types"
+import React, {useEffect, useState} from "react"
 import Link from "next/link"
 import Logo from "./Logo"
 import {useRouter} from "next/router"
-import {
-    DribbbleIcon,
-    GithubIcon,
-    LinkedInIcon,
-    MoonIcon,
-    PinterestIcon,
-    SunIcon,
-    TwitterIcon,
-} from "./Icons"
+import {GithubIcon, LinkedInIcon, MoonIcon, SunIcon} from "./Icons"
 import {motion} from "framer-motion"
 import useThemeSwitcher from "./hooks/useThemeSwitcher"
 import {THEME_DARK, THEME_LIGHT} from "@/common/contants"
@@ -61,6 +52,14 @@ const CustomMobileLink = ({href, title, className = "", toggle}) => {
 function NavBar(props) {
     const [mode, setMode] = useThemeSwitcher()
     const [isOpen, setIsOpen] = useState(false)
+    const [user, setUser] = useState({})
+
+    useEffect(() => {
+        fetch("/api/user")
+            .then((res) => res.json())
+            .then((data) => setUser(data))
+            .catch((err) => console.error(err))
+    }, [])
 
     const handleClickOpen = () => {
         setIsOpen(!isOpen)
@@ -92,11 +91,12 @@ function NavBar(props) {
             <div className='w-full flex justify-between items-center lg:hidden'>
                 <nav>
                     <CustomLink href='/' title='Home' className='mr-4' />
+                    <CustomLink href='/about' title='About' className='mr-4' />
                 </nav>
 
                 <nav className='flex items-center justify-center flex-wrap'>
                     <motion.a
-                        href='https://github.com/trungtrung-art'
+                        href={user.urlGithub}
                         target={"_blank"}
                         whileHover={{y: -2}}
                         whileTap={{scale: 0.9}}
@@ -105,7 +105,7 @@ function NavBar(props) {
                         <GithubIcon width='24px' height='24px' />
                     </motion.a>
                     <motion.a
-                        href='https://www.linkedin.com/in/thiện-trung-tristan-thien-439913213'
+                        href={user.urlLinked}
                         target='_blank'
                         whileHover={{y: -2}}
                         whileTap={{scale: 0.9}}
@@ -113,9 +113,6 @@ function NavBar(props) {
                     >
                         <LinkedInIcon width='24px' height='24px' />
                     </motion.a>
-
-                    {/* <Link href="/" target={"_blank"}>facebook</Link>
-        <Link href="/" target={"_blank"}>ins</Link> */}
 
                     <button
                         onClick={() => {
@@ -155,30 +152,9 @@ function NavBar(props) {
                             className=''
                             toggle={handleClickOpen}
                         />
-                        <CustomMobileLink
-                            href='/projects'
-                            title='Projects'
-                            className=''
-                            toggle={handleClickOpen}
-                        />
-                        <CustomMobileLink
-                            href='/articles'
-                            title='Articles'
-                            className=''
-                            toggle={handleClickOpen}
-                        />
                     </nav>
 
                     <nav className='flex items-center justify-center flex-wrap mt-2'>
-                        <motion.a
-                            href='hhtps://twitter.com'
-                            target={"_blank"}
-                            whileHover={{y: -2}}
-                            whileTap={{scale: 0.9}}
-                            className='w-6 mr-3 sm:mx-1'
-                        >
-                            <TwitterIcon width='24px' height='24px' />
-                        </motion.a>
                         <motion.a
                             href='hhtps://twitter.com'
                             target={"_blank"}
@@ -197,26 +173,6 @@ function NavBar(props) {
                         >
                             <LinkedInIcon width='24px' height='24px' />
                         </motion.a>
-                        <motion.a
-                            href='hhtps://twitter.com'
-                            target={"_blank"}
-                            whileHover={{y: -2}}
-                            whileTap={{scale: 0.9}}
-                            className='w-6 mx-3 bg-light rounded-full sm:mx-1'
-                        >
-                            <PinterestIcon width='24px' height='24px' />
-                        </motion.a>
-                        <motion.a
-                            href='hhtps://twitter.com'
-                            target={"_blank"}
-                            whileHover={{y: -2}}
-                            whileTap={{scale: 0.9}}
-                            className='w-6 ml-3 sm:mx-1'
-                        >
-                            <DribbbleIcon width='24px' height='24px' />
-                        </motion.a>
-                        {/* <Link href="/" target={"_blank"}>facebook</Link>
-      <Link href="/" target={"_blank"}>ins</Link> */}
 
                         <button
                             onClick={() => {
@@ -238,7 +194,7 @@ function NavBar(props) {
                 </motion.div>
             ) : null}
 
-            <div className='absolute left-[50%] top-2 translate-x-[-50%]'>
+            <div className='absolute left-[50%] top-[32px] translate-x-[-50%]'>
                 <Logo />
             </div>
         </header>

@@ -1,10 +1,8 @@
-import React, {useEffect, useRef} from "react"
+import React, {useEffect, useRef, useState} from "react"
 import PropTypes from "prop-types"
 import Head from "next/head"
 import AnimatedText from "@/components/AnimatedText"
 import Layout from "@/components/Layout"
-import profilePic from "~/images/profile/developer-pic-2.png"
-import profilePic2 from "~/images/profile/developer-pic-3.png"
 import Image from "next/image"
 import {useInView, useMotionValue, useSpring} from "framer-motion"
 import Skills from "@/components/Skills"
@@ -39,12 +37,21 @@ const AnimatedNumber = ({value}) => {
 }
 
 function about(props) {
+    const [about, setAbout] = useState({})
+
+    useEffect(() => {
+        fetch("/api/about")
+            .then((res) => res.json())
+            .then((data) => setAbout(data))
+            .catch((err) => console.error(err))
+    }, [])
+
     const expirentYears = calculateYearsFromDate("01/09/2018")
 
     return (
         <>
             <Head>
-                <title> TrungTran | About Page </title>{" "}
+                <title> TrungTrungArt | About Me </title>{" "}
                 <meta name='description' content='any description' />
             </Head>{" "}
             <TransitionEffect />
@@ -59,72 +66,25 @@ function about(props) {
                             <h2 className='mb-4 text-lg font-bold uppercase text-dark/75 dark:text-light/75'>
                                 Biography{" "}
                             </h2>{" "}
-                            <p className='font-medium'>
-                                - Hello, I`m Trung ( Việt Nam ), you can call me
-                                Tristan – a Front End Engineer with over 6 years
-                                of experience in web development and crafting
-                                exceptional user experiences.
-                            </p>{" "}
-                            <p className='my-4 font-medium'>
-                                - My journey into the world of information
-                                technology began during my high school years,
-                                where I enthusiastically explored and
-                                passionately learned about every aspect of the
-                                field. With a solid foundation in both computer
-                                hardware and software, continuously honed since
-                                my graduation in 2019, I`ve developed a
-                                comprehensive understanding of how technology
-                                operates and creates value.
-                            </p>{" "}
-                            <p className='my-4 font-medium'>
-                                - However, my greatest passion and the focal
-                                point of my career lie in User Interface (UI)
-                                programming and the creation of outstanding User
-                                Experiences (UX). I am fascinated by the ability
-                                to transform complex ideas into intuitive,
-                                aesthetically pleasing, and easy-to-use
-                                interfaces – where visual aesthetics are
-                                elevated and brought closer to the user.
-                            </p>{" "}
-                            <p className='my-4 font-medium'>
-                                - I believe that a truly great interface goes
-                                beyond mere visual appeal. It must be a
-                                harmonious blend of art and science, where every
-                                pixel and every interaction is meticulously
-                                designed to solve problems, streamline
-                                processes, and deliver maximum user
-                                satisfaction. More importantly, I firmly believe
-                                that every line of code and every design detail
-                                must strongly reflect and support business
-                                logic, contributing to the overall success of
-                                the project.
-                            </p>{" "}
-                            <p className='my-4 font-medium'>
-                                - Whether developing a unique website, a smooth
-                                mobile application, or any other digital
-                                product, I consistently bring my commitment to
-                                design excellence and user-centered thinking to
-                                every task. I constantly seek out new
-                                methodologies and cutting-edge technologies to
-                                bring the visions of clients and partners to
-                                life in the most creative and effective way
-                                possible.
-                            </p>{" "}
-                            <p className='font-medium'>
-                                - I eagerly look forward to the opportunity to
-                                connect and collaborate, bringing my skills,
-                                passion, and extensive experience as a seasoned
-                                Front End Engineer to your next project. Let`s
-                                build digital products that not only function
-                                flawlessly but also truly resonate with users.
-                            </p>{" "}
+                            {about?.bio?.length &&
+                                about?.bio?.map((text, index) => {
+                                    return (
+                                        <p
+                                            className={`font-medium ${
+                                                index != 0 ? "my-4" : ""
+                                            }`}
+                                        >
+                                            {text}
+                                        </p>
+                                    )
+                                })}
                         </div>{" "}
                         <div className='col-span-3 relative h-max rounded-2xl border-2 border-solid border-dark bg-light p-8 dark:bg-dark dark:border-light xl:col-span-4 md:order-1 md:col-span-9 md:p-0'>
                             <div className='absolute top-0 -right-3 -z-10 w-[102%] h-[103%] rounded-[2rem] bg-dark dark:bg-light md:hidden' />
                             <PixelTransition
                                 firstContent={
                                     <Image
-                                        src={profilePic2}
+                                        src={about?.imageUrl2}
                                         alt='TrungTran'
                                         className='w-full h-auto rounded-2xl'
                                         priority
@@ -133,7 +93,7 @@ function about(props) {
                                 }
                                 secondContent={
                                     <Image
-                                        src={profilePic}
+                                        src={about?.imageUrl3}
                                         alt='TrungTran'
                                         className='w-full h-auto rounded-2xl'
                                         priority
