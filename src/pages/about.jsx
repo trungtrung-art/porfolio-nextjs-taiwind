@@ -37,7 +37,7 @@ const AnimatedNumber = ({value}) => {
     return <span ref={ref}> </span>
 }
 
-function about(props) {
+function About() {
     const [about, setAbout] = useState({})
 
     useEffect(() => {
@@ -146,6 +146,6 @@ function about(props) {
     )
 }
 
-about.propTypes = {}
+About.propTypes = {}
 
-export default about
+export default About
