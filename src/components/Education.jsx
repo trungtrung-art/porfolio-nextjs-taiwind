@@ -1,10 +1,15 @@
-import React, {useRef} from "react"
-import PropTypes from "prop-types"
+import React, {useEffect, useRef, useState} from "react"
 import {useScroll, motion} from "framer-motion"
 import LilIcon from "./LilIcon"
-import {listEducation} from "@/common/contants"
 
-const Detail = ({type, time, place, info}) => {
+const Detail = ({
+    degree,
+    date_issued,
+    institution,
+    grade,
+    major,
+    mode_of_study,
+}) => {
     const ref = useRef(null)
     return (
         <li
@@ -13,17 +18,49 @@ const Detail = ({type, time, place, info}) => {
         >
             <LilIcon reference={ref} />
             <motion.div
-                initial={{y: 50}}
-                whileInView={{y: 0}}
-                transition={{duration: 0.5, type: "spring"}}
+                initial={{y: 50, opacity: 0}}
+                whileInView={{y: 0, opacity: 1}}
+                transition={{duration: 0.6, type: "spring"}}
+                viewport={{once: true}}
+                className='relative w-full bg-light dark:bg-dark border border-dark/10 dark:border-light/20 rounded-2xl shadow-md p-6 md:p-4'
             >
-                <h3 className='capitalize font-bold text-2xl sm:text-xl xs:text-lg'>
-                    {type}
-                </h3>
-                <span className='capitalize font-medium text-dark/75 dark:text-light/75 xs:text-sm'>
-                    {time} | {place}
-                </span>
-                <p className='font-medium w-full md:text-sm'>{info}</p>
+                {/* Header */}
+                <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3'>
+                    <h3 className='font-bold text-2xl sm:text-xl text-primary'>
+                        {degree}
+                    </h3>
+                    <span className='text-sm text-dark/60 dark:text-light/60 italic'>
+                        {mode_of_study}
+                    </span>
+                </div>
+
+                {/* Main info */}
+                <div className='space-y-2'>
+                    <p className='text-lg sm:text-base font-semibold'>
+                        <span className='text-dark dark:text-light/90'>
+                            Major:
+                        </span>{" "}
+                        {major}
+                    </p>
+                    <p className='text-lg sm:text-base'>
+                        <span className='font-semibold text-dark dark:text-light/90'>
+                            Institution:
+                        </span>{" "}
+                        {institution}
+                    </p>
+                    <p className='text-lg sm:text-base'>
+                        <span className='font-semibold text-dark dark:text-light/90'>
+                            Grade:
+                        </span>{" "}
+                        {grade}
+                    </p>
+                    <p className='text-lg sm:text-base'>
+                        <span className='font-semibold text-dark dark:text-light/90'>
+                            Date Issued:
+                        </span>{" "}
+                        {date_issued}
+                    </p>
+                </div>
             </motion.div>
         </li>
     )
@@ -35,6 +72,15 @@ function Education(props) {
         target: ref,
         offset: ["start end", "center start"],
     })
+
+    const [education, setEducations] = useState([])
+
+    useEffect(() => {
+        fetch("/api/education")
+            .then((res) => res.json())
+            .then((data) => setEducations(data))
+            .catch((err) => console.error(err))
+    }, [])
     return (
         <div className='my-64'>
             <h2 className='font-bold text-8xl mb-32 w-full text-center md:text-6xl xs:text-4xl md:mb-16'>
@@ -53,15 +99,29 @@ function Education(props) {
                 />
 
                 <ul className='w-full flex flex-col items-start justify-between ml-4 xs:ml-2'>
-                    {listEducation.map(({type, time, place, info}) => (
-                        <Detail
-                            key={type}
-                            type={type}
-                            time={time}
-                            place={place}
-                            info={info}
-                        />
-                    ))}
+                    {education.map(
+                        (
+                            {
+                                degree,
+                                date_issued,
+                                institution,
+                                grade,
+                                major,
+                                mode_of_study,
+                            },
+                            index,
+                        ) => (
+                            <Detail
+                                key={index}
+                                degree={degree}
+                                major={major}
+                                institution={institution}
+                                grade={grade}
+                                date_issued={date_issued}
+                                mode_of_study={mode_of_study}
+                            />
+                        ),
+                    )}
                 </ul>
             </div>
         </div>

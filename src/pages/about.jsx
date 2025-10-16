@@ -1,5 +1,6 @@
+"use client"
+
 import React, {useEffect, useRef, useState} from "react"
-import PropTypes from "prop-types"
 import Head from "next/head"
 import AnimatedText from "@/components/AnimatedText"
 import Layout from "@/components/Layout"
@@ -70,6 +71,7 @@ function about(props) {
                                 about?.bio?.map((text, index) => {
                                     return (
                                         <p
+                                            key={index}
                                             className={`font-medium ${
                                                 index != 0 ? "my-4" : ""
                                             }`}
@@ -106,13 +108,6 @@ function about(props) {
                                 className='custom-pixel-card'
                                 aspectRatio={"150%"}
                             />
-                            {/* <Image
-                                src={profilePic}
-                                alt='CodeBucks'
-                                className='w-full h-auto rounded-2xl'
-                                priority
-                                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                            /> */}
                         </div>{" "}
                         <div className='col-span-3 flex flex-col items-end justify-between xl:col-span-9 xl:flex-row xl:items-center md:order-4'>
                             <div className='flex flex-col items-end justify-center xl:items-center'>

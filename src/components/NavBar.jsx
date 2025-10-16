@@ -194,7 +194,7 @@ function NavBar(props) {
                 </motion.div>
             ) : null}
 
-            <div className='absolute left-[50%] top-[32px] translate-x-[-50%]'>
+            <div className='absolute lg:right-[20px] lg:translate-x-[0] lg:translate-y-[-45%] top-[50%] translate-x-[50%] translate-y-[-50%] right-[50%] '>
                 <Logo />
             </div>
         </header>

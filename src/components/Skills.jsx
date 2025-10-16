@@ -1,11 +1,16 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect, useMemo, useState} from "react"
 import {motion} from "framer-motion"
 import {generateSkillPositions} from "@/common/helpers"
+import {useMediaQuery} from "./hooks/useMediaQuery"
 
-const Skill = ({name, x, y, link}) => {
+const Skill = ({name, x, y, link, logo}) => {
     return (
         <motion.a
-            className='flex items-center justify-center rounded-full font-semibold bg-dark text-light py-3 px-6 shadow-dark cursor-pointer absolute dark:bg-light dark:text-dark lg:py-2 lg:px-4 md:text-sm md:py-1.5 md:px-3 xs:bg-transparent xs:dark:bg-transparent xs:text-dark xs:dark:text-light xs:font-bold'
+            className='flex items-center justify-center rounded-full text-light p-4 shadow-dark cursor-pointer absolute 
+    bg-light dark:text-dark 
+    lg:p-3 md:p-2 
+    shadow-[0_4px_10px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_15px_rgba(0,0,0,0.25)]
+    transition-shadow duration-300'
             whileHover={{scale: 1.05}}
             initial={{x: 0, y: 0}}
             whileInView={{x: x, y: y, transition: {duration: 1.5}}}
@@ -13,13 +18,20 @@ const Skill = ({name, x, y, link}) => {
             href={link}
             target='_blank'
         >
-            {name}{" "}
+            <img
+                src={logo}
+                alt={name}
+                className='w-10 h-10 object-contain md:w-6 md:h-6'
+            />
         </motion.a>
     )
 }
 
 function Skills(props) {
     const [skills, setSkills] = useState([])
+
+    const isMobile = useMediaQuery("(max-width: 640px)")
+    const isTablet = useMediaQuery("(max-width: 1024px)")
 
     useEffect(() => {
         fetch("/api/skill")
@@ -28,7 +40,11 @@ function Skills(props) {
             .catch((err) => console.error(err))
     }, [])
 
-    const listKillRandomPosition = generateSkillPositions(skills, [7, 20], 9)
+    const listKillRandomPosition = useMemo(() => {
+        if (isMobile) return generateSkillPositions(skills, [15, 35], 10)
+        if (isTablet) return generateSkillPositions(skills, [10, 25], 8)
+        return generateSkillPositions(skills, [5, 10], 5)
+    }, [skills, isMobile, isTablet])
 
     return (
         <>
@@ -49,6 +65,7 @@ function Skills(props) {
                     <Skill
                         key={skill.name}
                         name={skill.name}
+                        logo={skill.logo}
                         x={skill.x}
                         y={skill.y}
                         link={skill.url}

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import {CircularText} from "./Icons"
 import Link from "next/link"
 
-function HireMe(props) {
+function HireMe() {
     const [user, setUser] = useState({})
 
     useEffect(() => {
@@ -14,7 +14,7 @@ function HireMe(props) {
     return (
         <div
             className='fixed left-4 bottom-4 flex item-center justify-center overflow-hidden
-    md:right-8 md:top-0 md:left-auto md:bottom-auto md:absolute sm:right-0'
+    md:right-8 md:top-[50px] md:left-auto md:bottom-auto md:absolute sm:right-0'
         >
             <div
                 className='w-48 h-auto flex items-center justify-center relative

@@ -1,10 +1,9 @@
 import NavBar from "@/components/NavBar"
-import "@/styles/globals.css"
 import {AnimatePresence} from "framer-motion"
-import {Montserrat} from "next/font/google"
 import Head from "next/head"
 import {useRouter} from "next/router"
-import {Fira_Code} from "next/font/google"
+import {Fira_Code, Montserrat} from "next/font/google"
+import "@/styles/globals.css"
 
 const fira = Fira_Code({
     subsets: ["latin"],

@@ -1,8 +1,6 @@
 import React, {useEffect, useRef, useState} from "react"
-import PropTypes from "prop-types"
 import {useScroll, motion} from "framer-motion"
 import LilIcon from "./LilIcon"
-import {listExperience} from "@/common/contants"
 
 const Detail = ({
     position,
@@ -42,6 +40,7 @@ const Detail = ({
                 {description.map((work) => {
                     return (
                         <p
+                            key={JSON.stringify(work)}
                             className='font-medium w-full md:text-sm'
                             dangerouslySetInnerHTML={{__html: work}}
                         />

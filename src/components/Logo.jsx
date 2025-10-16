@@ -29,7 +29,7 @@ function Logo() {
         <div className='flex items-center justify-center '>
             {phase === "intro" ? (
                 <motion.div
-                    className='text-6xl font-extrabold flex items-center justify-center font-fira'
+                    className='text-6xl md:text-2xl font-extrabold flex items-center justify-center font-fira'
                     initial='hidden'
                     animate='visible'
                     variants={{
@@ -88,7 +88,7 @@ function Logo() {
             ) : (
                 // Typing effect
                 <motion.div
-                    className='text-4xl md:text-6xl font-bold font-fira 
+                    className='text-4xl md:text-2xl font-bold font-fira 
                      bg-gradient-to-r from-primary to-dark dark:to-light
                      bg-clip-text text-transparent'
                     initial={{opacity: 0}}
