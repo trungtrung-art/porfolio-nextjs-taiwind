@@ -14,7 +14,7 @@ const Detail = ({
     return (
         <li
             ref={ref}
-            className='my-8 first:mt-0 last:mb-0 w-[60%] mx-auto flex flex-col items-center justify-between md:w-[80%]'
+            className='my-8 first:mt-0 last:mb-0 w-[65%] mx-auto flex flex-col items-center justify-between md:w-[80%]'
         >
             <LilIcon reference={ref} />
             <motion.div
@@ -26,7 +26,7 @@ const Detail = ({
             >
                 {/* Header */}
                 <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3'>
-                    <h3 className='font-bold text-2xl sm:text-xl text-primary'>
+                    <h3 className='font-bold text-2xl sm:text-xl text-primary dark:text-primaryDark capitalize'>
                         {degree}
                     </h3>
                     <span className='text-sm text-dark/60 dark:text-light/60 italic'>

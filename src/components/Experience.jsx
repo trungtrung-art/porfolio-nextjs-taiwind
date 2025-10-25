@@ -55,7 +55,7 @@ const Detail = ({
                             {projects.map((proj, i) => (
                                 <li
                                     key={i}
-                                    className='p-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 hover:shadow-md transition-all duration-300'
+                                    className='p-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 hover:shadow-md transition-all duration-300  shadow-[0_4px_10px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_15px_rgba(0,0,0,0.25)]'
                                 >
                                     <div className='flex items-center justify-between'>
                                         {proj.url ? (

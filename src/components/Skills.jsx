@@ -21,7 +21,7 @@ const Skill = ({name, x, y, link, logo}) => {
             <img
                 src={logo}
                 alt={name}
-                className='w-10 h-10 object-contain md:w-6 md:h-6'
+                className='w-10 h-10 object-contain md:w-9 md:h-9'
             />
         </motion.a>
     )

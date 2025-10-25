@@ -13,7 +13,7 @@ function HireMe() {
     }, [])
     return (
         <div
-            className='fixed left-4 bottom-4 flex item-center justify-center overflow-hidden
+            className='fixed left-4 bottom-14 flex item-center justify-center overflow-hidden
     md:right-8 md:top-[50px] md:left-auto md:bottom-auto md:absolute sm:right-0'
         >
             <div

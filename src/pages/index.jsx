@@ -9,10 +9,13 @@ import TransitionEffect from "@/components/TransitionEffect"
 import BlurText from "@/components/BlurText"
 import TextType from "@/components/TextType"
 import {useEffect, useState} from "react"
+import {useDeviceType} from "@/hooks/useDeviceType"
 
 export default function Home() {
     const [content, setContent] = useState({})
     const [user, setUser] = useState({})
+
+    const deviceType = useDeviceType()
 
     useEffect(() => {
         fetch("/api/home")
@@ -50,17 +53,17 @@ export default function Home() {
                         <div className='w-1/2 flex flex-col items-center self-center lg:w-full lg:text-center'>
                             <BlurText
                                 text={content.title || ""}
-                                delay={150}
+                                delay={deviceType === "mobile" ? 200 : 150}
                                 animateBy='words'
                                 direction='top'
-                                className='justify-start !text-6xl xl:!text-5xl lg:!text-6xl md:!text-5xl sm:!text-3xl lg:justify-center '
+                                className='justify-start !text-6xl xl:!text-5xl lg:!text-6xl md:!text-5xl sm:!text-2xl lg:justify-center '
                             />
 
                             <TextType
                                 className='my-4 text-base font-medium md:text-sm sm:text-xs '
                                 text={content.description || ""}
                                 as='p'
-                                typingSpeed={7}
+                                typingSpeed={deviceType === "mobile" ? 10 : 7}
                             />
 
                             <div className='flex items-center self-start mt-2 lg:self-center'>
