@@ -76,7 +76,9 @@ const Detail = ({
                                             className={`text-xs px-2 py-1 rounded-full ${
                                                 proj.status === "Completed"
                                                     ? "bg-green-100 text-green-600 dark:bg-green-800 dark:text-green-300"
-                                                    : "bg-yellow-100 text-yellow-600 dark:bg-yellow-800 dark:text-yellow-300"
+                                                    : proj.name
+                                                    ? "bg-yellow-100 text-yellow-600 dark:bg-yellow-800 dark:text-yellow-300"
+                                                    : ""
                                             }`}
                                         >
                                             {proj.status}

@@ -5,6 +5,7 @@ import {useRouter} from "next/router"
 import {Fira_Code, Montserrat} from "next/font/google"
 import "@/styles/globals.css"
 import Footer from "@/components/Footer"
+import Particles from "@/components/ParticlesBackground"
 
 const fira = Fira_Code({
     subsets: ["latin"],
@@ -29,7 +30,7 @@ export default function App({Component, pageProps}) {
                 <link rel='icon' href='/favicon.ico' />
             </Head>{" "}
             <main
-                className={`${montserrat.variable} ${fira.variable} font-mont bg-light dark:bg-dark w-full min-h-screen relative overflow-hidden`}
+                className={`${montserrat.variable} ${fira.variable} font-mont bg-light dark:bg-dark w-full min-h-screen relative`}
             >
                 <NavBar />
                 <AnimatePresence mode='wait'>
